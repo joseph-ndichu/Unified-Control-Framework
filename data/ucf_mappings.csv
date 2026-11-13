@@ -1,0 +1,31 @@
+ucf_id,framework,control_id,relationship,rationale,review_status
+UCF-IAM-01,NCA ECC,2-2-1,equivalent,"Both require IAM requirements to be defined, documented, and approved.",approved
+UCF-IAM-01,ISO/IEC 27001,A.5.15,partial,A.5.15 covers both setting and implementing access rules. This control covers the setting part.,approved
+UCF-IAM-01,ISO/IEC 27001,A.5.1,related,"A.5.1 is the general rule for all security policies, of which the access control policy is one.",approved
+UCF-IAM-02,NCA ECC,2-2-2,equivalent,Both require the IAM requirements to be implemented.,approved
+UCF-IAM-02,ISO/IEC 27001,A.5.15,partial,Covers the implementation half of A.5.15.,approved
+UCF-IAM-02,ISO/IEC 27001,A.8.3,covers,Restricting access to information in line with the policy is part of implementing it.,approved
+UCF-IAM-03,ISO/IEC 27001,A.5.16,equivalent,Both require the full life cycle of identities to be managed.,approved
+UCF-IAM-03,NCA ECC,2.2.3.5,related,NCA has no identity lifecycle control. It only requires periodic review of identities.,approved
+UCF-IAM-04,NCA ECC,2.2.3.1,covers,Username and password authentication is the stated minimum of this control.,approved
+UCF-IAM-04,ISO/IEC 27001,A.5.17,covers,Management of authentication secrets is included in this control.,approved
+UCF-IAM-04,ISO/IEC 27001,A.8.5,partial,A.8.5 covers secure authentication in general. The stronger methods are in UCF-IAM-05.,approved
+UCF-IAM-05,NCA ECC,2.2.3.2,equivalent,Both require MFA for remote access and privileged accounts based on an impact assessment.,approved
+UCF-IAM-05,ISO/IEC 27001,A.8.5,partial,A.8.5 requires authentication strength to match the access restrictions. MFA is one way to meet it.,approved
+UCF-IAM-05,NCA ECC,2.4.3.2,related,MFA requirement specific to remote and webmail access to email.,approved
+UCF-IAM-05,NCA ECC,2.15.3.5,related,Authentication factors for users of external web applications.,approved
+UCF-IAM-06,NCA ECC,2.2.3.3,equivalent,"Same four principles: need-to-know, need-to-use, least privilege, segregation of duties.",approved
+UCF-IAM-06,ISO/IEC 27001,A.8.3,partial,A.8.3 restricts access per the policy. These principles are how the restriction is decided.,approved
+UCF-IAM-06,ISO/IEC 27001,A.5.3,partial,"A.5.3 covers segregation of duties in general, not only in access rights.",approved
+UCF-IAM-06,ISO/IEC 27001,A.5.15,related,The principles are normally stated in the access control policy.,approved
+UCF-IAM-07,NCA ECC,2.2.3.4,equivalent,Both require privileged access to be managed.,approved
+UCF-IAM-07,ISO/IEC 27001,A.8.2,equivalent,Both require privileged access rights to be restricted and managed.,approved
+UCF-IAM-07,ISO/IEC 27001,A.8.18,related,Privileged utility programs are a specific case of privileged access.,approved
+UCF-IAM-08,ISO/IEC 27001,A.5.18,equivalent,"Both cover granting, reviewing, changing, and removing access rights.",approved
+UCF-IAM-08,NCA ECC,2.2.3.5,covers,Periodic review of identities and access rights is one part of this control.,approved
+UCF-IAM-08,NCA ECC,1-9-5,covers,Review and immediate revocation of personnel powers at end of employment is one part of this control.,approved
+UCF-IAM-08,ISO/IEC 27001,A.5.11,related,Return of assets at end of employment happens alongside access revocation.,approved
+UCF-IAM-09,NCA ECC,2-2-4,equivalent,Both require periodic review of how the IAM requirements are implemented.,approved
+UCF-IAM-09,ISO/IEC 27001,A.5.36,partial,"A.5.36 requires compliance reviews for all policies, not only access control.",approved
+UCF-IAM-09,ISO/IEC 27001,A.5.1,partial,A.5.1 requires all policies to be reviewed at planned intervals.,approved
+UCF-IAM-10,ISO/IEC 27001,A.8.4,equivalent,Both require access to source code and development tools to be managed.,approved

@@ -1,0 +1,94 @@
+framework,version,control_id,parent_id,domain,subdomain,title,text
+ISO/IEC 27001,2022,A.5.1,,Organizational,,Policies for information security,"[Paraphrase] Define an information security policy and topic-specific policies, have management approve them, communicate them, and review them at planned intervals or after significant change."
+ISO/IEC 27001,2022,A.5.2,,Organizational,,Information security roles and responsibilities,[Paraphrase] Define and assign information security roles and responsibilities according to the organization's needs.
+ISO/IEC 27001,2022,A.5.3,,Organizational,,Segregation of duties,[Paraphrase] Separate conflicting duties and areas of responsibility so one person cannot misuse assets unnoticed.
+ISO/IEC 27001,2022,A.5.4,,Organizational,,Management responsibilities,[Paraphrase] Management requires all personnel to apply information security in line with the organization's policies and procedures.
+ISO/IEC 27001,2022,A.5.5,,Organizational,,Contact with authorities,[Paraphrase] Establish and maintain contact with relevant authorities such as regulators and law enforcement.
+ISO/IEC 27001,2022,A.5.6,,Organizational,,Contact with special interest groups,"[Paraphrase] Maintain contact with special interest groups, security forums, and professional associations."
+ISO/IEC 27001,2022,A.5.7,,Organizational,,Threat intelligence,[Paraphrase] Collect and analyse information about threats to produce threat intelligence.
+ISO/IEC 27001,2022,A.5.8,,Organizational,,Information security in project management,[Paraphrase] Integrate information security into project management for every type of project.
+ISO/IEC 27001,2022,A.5.9,,Organizational,,Inventory of information and other associated assets,"[Paraphrase] Develop and maintain an inventory of information and other associated assets, including their owners."
+ISO/IEC 27001,2022,A.5.10,,Organizational,,Acceptable use of information and other associated assets,"[Paraphrase] Identify, document, and implement rules for acceptable use and handling of information and associated assets."
+ISO/IEC 27001,2022,A.5.11,,Organizational,,Return of assets,"[Paraphrase] Personnel and other parties return all organizational assets in their possession when their employment, contract, or agreement changes or ends."
+ISO/IEC 27001,2022,A.5.12,,Organizational,,Classification of information,"[Paraphrase] Classify information by its confidentiality, integrity, and availability needs and by relevant stakeholder requirements."
+ISO/IEC 27001,2022,A.5.13,,Organizational,,Labelling of information,[Paraphrase] Develop and apply procedures for labelling information in line with the classification scheme.
+ISO/IEC 27001,2022,A.5.14,,Organizational,,Information transfer,"[Paraphrase] Put rules, procedures, or agreements in place for transferring information inside the organization and with other parties."
+ISO/IEC 27001,2022,A.5.15,,Organizational,,Access control,"[Paraphrase] Define and apply rules for physical and logical access to information and assets, based on business and security needs."
+ISO/IEC 27001,2022,A.5.16,,Organizational,,Identity management,"[Paraphrase] Manage identities through their whole life cycle, from creation to removal."
+ISO/IEC 27001,2022,A.5.17,,Organizational,,Authentication information,"[Paraphrase] Control how passwords and other authentication secrets are issued and managed, and tell users how to handle them."
+ISO/IEC 27001,2022,A.5.18,,Organizational,,Access rights,"[Paraphrase] Grant, review, change, and revoke access rights in line with the access control policy."
+ISO/IEC 27001,2022,A.5.19,,Organizational,,Information security in supplier relationships,[Paraphrase] Define and apply processes to manage the security risks that come from using suppliers' products and services.
+ISO/IEC 27001,2022,A.5.20,,Organizational,,Addressing information security within supplier agreements,[Paraphrase] Agree relevant information security requirements with each supplier according to the type of relationship.
+ISO/IEC 27001,2022,A.5.21,,Organizational,,Managing information security in the ICT supply chain,[Paraphrase] Define and apply processes to manage security risks in the ICT products and services supply chain.
+ISO/IEC 27001,2022,A.5.22,,Organizational,,"Monitoring, review and change management of supplier services","[Paraphrase] Regularly monitor, review, and evaluate supplier security practices and service delivery, and manage changes to them."
+ISO/IEC 27001,2022,A.5.23,,Organizational,,Information security for use of cloud services,"[Paraphrase] Set processes for acquiring, using, managing, and exiting cloud services in line with the organization's security requirements."
+ISO/IEC 27001,2022,A.5.24,,Organizational,,Information security incident management planning and preparation,"[Paraphrase] Plan and prepare for incident management by defining processes, roles, and responsibilities."
+ISO/IEC 27001,2022,A.5.25,,Organizational,,Assessment and decision on information security events,[Paraphrase] Assess information security events and decide whether to categorize them as incidents.
+ISO/IEC 27001,2022,A.5.26,,Organizational,,Response to information security incidents,[Paraphrase] Respond to information security incidents according to documented procedures.
+ISO/IEC 27001,2022,A.5.27,,Organizational,,Learning from information security incidents,[Paraphrase] Use what is learned from incidents to strengthen and improve security controls.
+ISO/IEC 27001,2022,A.5.28,,Organizational,,Collection of evidence,"[Paraphrase] Set procedures for identifying, collecting, acquiring, and preserving evidence related to security events."
+ISO/IEC 27001,2022,A.5.29,,Organizational,,Information security during disruption,[Paraphrase] Plan how to keep information security at an appropriate level during a disruption.
+ISO/IEC 27001,2022,A.5.30,,Organizational,,ICT readiness for business continuity,"[Paraphrase] Plan, implement, maintain, and test ICT readiness based on business continuity objectives."
+ISO/IEC 27001,2022,A.5.31,,Organizational,,"Legal, statutory, regulatory and contractual requirements","[Paraphrase] Identify, document, and keep current the legal, statutory, regulatory, and contractual requirements relevant to information security, and how the organization meets them."
+ISO/IEC 27001,2022,A.5.32,,Organizational,,Intellectual property rights,[Paraphrase] Implement procedures to protect intellectual property rights.
+ISO/IEC 27001,2022,A.5.33,,Organizational,,Protection of records,"[Paraphrase] Protect records from loss, destruction, falsification, unauthorized access, and unauthorized release."
+ISO/IEC 27001,2022,A.5.34,,Organizational,,Privacy and protection of PII,[Paraphrase] Identify and meet requirements for preserving privacy and protecting personally identifiable information.
+ISO/IEC 27001,2022,A.5.35,,Organizational,,Independent review of information security,"[Paraphrase] Have the organization's approach to information security, and its implementation, independently reviewed at planned intervals or after significant change."
+ISO/IEC 27001,2022,A.5.36,,Organizational,,"Compliance with policies, rules and standards for information security","[Paraphrase] Regularly review compliance with the organization's information security policy, topic-specific policies, rules, and standards."
+ISO/IEC 27001,2022,A.5.37,,Organizational,,Documented operating procedures,[Paraphrase] Document operating procedures for information processing facilities and make them available to those who need them.
+ISO/IEC 27001,2022,A.6.1,,People,,Screening,"[Paraphrase] Carry out background checks on candidates before they join and on an ongoing basis, in proportion to the role and the risks."
+ISO/IEC 27001,2022,A.6.2,,People,,Terms and conditions of employment,[Paraphrase] State the information security responsibilities of personnel and of the organization in employment agreements.
+ISO/IEC 27001,2022,A.6.3,,People,,"Information security awareness, education and training","[Paraphrase] Give personnel and relevant parties security awareness, education, and training, with regular updates relevant to their role."
+ISO/IEC 27001,2022,A.6.4,,People,,Disciplinary process,[Paraphrase] Formalize and communicate a disciplinary process for those who commit an information security policy violation.
+ISO/IEC 27001,2022,A.6.5,,People,,Responsibilities after termination or change of employment,"[Paraphrase] Define, enforce, and communicate the security responsibilities that remain valid after employment ends or changes."
+ISO/IEC 27001,2022,A.6.6,,People,,Confidentiality or non-disclosure agreements,"[Paraphrase] Identify, document, regularly review, and have signed the confidentiality or non-disclosure agreements that reflect the organization's needs."
+ISO/IEC 27001,2022,A.6.7,,People,,Remote working,"[Paraphrase] Implement security measures for personnel working remotely to protect information accessed, processed, or stored outside the organization's premises."
+ISO/IEC 27001,2022,A.6.8,,People,,Information security event reporting,[Paraphrase] Provide a mechanism for personnel to report observed or suspected security events promptly through appropriate channels.
+ISO/IEC 27001,2022,A.7.1,,Physical,,Physical security perimeters,[Paraphrase] Define and use security perimeters to protect areas that contain information and associated assets.
+ISO/IEC 27001,2022,A.7.2,,Physical,,Physical entry,[Paraphrase] Protect secure areas with appropriate entry controls and access points.
+ISO/IEC 27001,2022,A.7.3,,Physical,,"Securing offices, rooms and facilities","[Paraphrase] Design and implement physical security for offices, rooms, and facilities."
+ISO/IEC 27001,2022,A.7.4,,Physical,,Physical security monitoring,[Paraphrase] Continuously monitor premises for unauthorized physical access.
+ISO/IEC 27001,2022,A.7.5,,Physical,,Protecting against physical and environmental threats,[Paraphrase] Design and implement protection against physical and environmental threats such as natural disasters.
+ISO/IEC 27001,2022,A.7.6,,Physical,,Working in secure areas,[Paraphrase] Design and implement security measures for working in secure areas.
+ISO/IEC 27001,2022,A.7.7,,Physical,,Clear desk and clear screen,[Paraphrase] Define and enforce clear desk rules for papers and removable media and clear screen rules for information processing facilities.
+ISO/IEC 27001,2022,A.7.8,,Physical,,Equipment siting and protection,[Paraphrase] Site equipment securely and protect it.
+ISO/IEC 27001,2022,A.7.9,,Physical,,Security of assets off-premises,[Paraphrase] Protect assets that are used or kept off-site.
+ISO/IEC 27001,2022,A.7.10,,Physical,,Storage media,"[Paraphrase] Manage storage media through acquisition, use, transportation, and disposal according to the classification scheme and handling requirements."
+ISO/IEC 27001,2022,A.7.11,,Physical,,Supporting utilities,[Paraphrase] Protect information processing facilities from power failures and other disruptions caused by failures in supporting utilities.
+ISO/IEC 27001,2022,A.7.12,,Physical,,Cabling security,"[Paraphrase] Protect cables carrying power, data, or supporting information services from interception, interference, and damage."
+ISO/IEC 27001,2022,A.7.13,,Physical,,Equipment maintenance,"[Paraphrase] Maintain equipment correctly to preserve the availability, integrity, and confidentiality of information."
+ISO/IEC 27001,2022,A.7.14,,Physical,,Secure disposal or re-use of equipment,[Paraphrase] Verify that sensitive data and licensed software are removed or securely overwritten before equipment with storage media is disposed of or reused.
+ISO/IEC 27001,2022,A.8.1,,Technological,,User endpoint devices,"[Paraphrase] Protect information stored on, processed by, or accessible through user endpoint devices."
+ISO/IEC 27001,2022,A.8.2,,Technological,,Privileged access rights,[Paraphrase] Restrict and manage the assignment and use of privileged access.
+ISO/IEC 27001,2022,A.8.3,,Technological,,Information access restriction,[Paraphrase] Limit access to information and assets according to the access control policy.
+ISO/IEC 27001,2022,A.8.4,,Technological,,Access to source code,"[Paraphrase] Control read and write access to source code, development tools, and libraries."
+ISO/IEC 27001,2022,A.8.5,,Technological,,Secure authentication,[Paraphrase] Use secure authentication methods that match the access restrictions and the access control policy.
+ISO/IEC 27001,2022,A.8.6,,Technological,,Capacity management,[Paraphrase] Monitor and adjust the use of resources in line with current and expected capacity requirements.
+ISO/IEC 27001,2022,A.8.7,,Technological,,Protection against malware,"[Paraphrase] Implement protection against malware, supported by appropriate user awareness."
+ISO/IEC 27001,2022,A.8.8,,Technological,,Management of technical vulnerabilities,"[Paraphrase] Obtain information about technical vulnerabilities in the systems in use, evaluate the exposure, and take appropriate measures."
+ISO/IEC 27001,2022,A.8.9,,Technological,,Configuration management,"[Paraphrase] Establish, document, implement, monitor, and review configurations of hardware, software, services, and networks, including security configurations."
+ISO/IEC 27001,2022,A.8.10,,Technological,,Information deletion,"[Paraphrase] Delete information stored in systems, devices, or other storage media when it is no longer required."
+ISO/IEC 27001,2022,A.8.11,,Technological,,Data masking,"[Paraphrase] Use data masking in line with the access control policy, other topic-specific policies, business requirements, and applicable legislation."
+ISO/IEC 27001,2022,A.8.12,,Technological,,Data leakage prevention,"[Paraphrase] Apply data leakage prevention measures to systems, networks, and devices that process, store, or transmit sensitive information."
+ISO/IEC 27001,2022,A.8.13,,Technological,,Information backup,"[Paraphrase] Maintain and regularly test backup copies of information, software, and systems in line with the agreed backup policy."
+ISO/IEC 27001,2022,A.8.14,,Technological,,Redundancy of information processing facilities,[Paraphrase] Implement enough redundancy in information processing facilities to meet availability requirements.
+ISO/IEC 27001,2022,A.8.15,,Technological,,Logging,"[Paraphrase] Produce, store, protect, and analyse logs that record activities, exceptions, faults, and other relevant events."
+ISO/IEC 27001,2022,A.8.16,,Technological,,Monitoring activities,"[Paraphrase] Monitor networks, systems, and applications for anomalous behaviour and evaluate potential security incidents."
+ISO/IEC 27001,2022,A.8.17,,Technological,,Clock synchronization,[Paraphrase] Synchronize the clocks of information processing systems to approved time sources.
+ISO/IEC 27001,2022,A.8.18,,Technological,,Use of privileged utility programs,[Paraphrase] Restrict and tightly control the use of utility programs that can override system and application controls.
+ISO/IEC 27001,2022,A.8.19,,Technological,,Installation of software on operational systems,[Paraphrase] Implement procedures and measures to securely manage software installation on operational systems.
+ISO/IEC 27001,2022,A.8.20,,Technological,,Networks security,"[Paraphrase] Secure, manage, and control networks and network devices to protect information in systems and applications."
+ISO/IEC 27001,2022,A.8.21,,Technological,,Security of network services,"[Paraphrase] Identify, implement, and monitor security mechanisms, service levels, and service requirements for network services."
+ISO/IEC 27001,2022,A.8.22,,Technological,,Segregation of networks,"[Paraphrase] Segregate groups of information services, users, and information systems on the organization's networks."
+ISO/IEC 27001,2022,A.8.23,,Technological,,Web filtering,[Paraphrase] Manage access to external websites to reduce exposure to malicious content.
+ISO/IEC 27001,2022,A.8.24,,Technological,,Use of cryptography,"[Paraphrase] Define and implement rules for the effective use of cryptography, including cryptographic key management."
+ISO/IEC 27001,2022,A.8.25,,Technological,,Secure development life cycle,[Paraphrase] Establish and apply rules for the secure development of software and systems.
+ISO/IEC 27001,2022,A.8.26,,Technological,,Application security requirements,"[Paraphrase] Identify, specify, and approve information security requirements when developing or acquiring applications."
+ISO/IEC 27001,2022,A.8.27,,Technological,,Secure system architecture and engineering principles,"[Paraphrase] Establish, document, maintain, and apply principles for engineering secure systems."
+ISO/IEC 27001,2022,A.8.28,,Technological,,Secure coding,[Paraphrase] Apply secure coding principles to software development.
+ISO/IEC 27001,2022,A.8.29,,Technological,,Security testing in development and acceptance,[Paraphrase] Define and implement security testing processes in the development life cycle.
+ISO/IEC 27001,2022,A.8.30,,Technological,,Outsourced development,"[Paraphrase] Direct, monitor, and review the activities related to outsourced system development."
+ISO/IEC 27001,2022,A.8.31,,Technological,,"Separation of development, test and production environments","[Paraphrase] Separate and secure development, testing, and production environments."
+ISO/IEC 27001,2022,A.8.32,,Technological,,Change management,[Paraphrase] Subject changes to information processing facilities and information systems to change management procedures.
+ISO/IEC 27001,2022,A.8.33,,Technological,,Test information,"[Paraphrase] Select, protect, and manage test information appropriately."
+ISO/IEC 27001,2022,A.8.34,,Technological,,Protection of information systems during audit testing,[Paraphrase] Plan audit tests and other assurance activities on operational systems and agree them between the tester and appropriate management.
