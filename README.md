@@ -21,7 +21,7 @@ evidenced once instead of once per framework.
 |---|---|
 | Database | PostgreSQL |
 | Backend | Django, Django REST Framework (`backend/`) |
-| Frontend | React, Tailwind CSS, Recharts (`frontend/`) |
+| Frontend | React, React Router, Tailwind CSS (`frontend/`) |
 | Data | CSV files, the source of truth for frameworks and mappings (`data/`) |
 
 ## Setup

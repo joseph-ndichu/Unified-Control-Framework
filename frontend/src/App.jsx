@@ -1,20 +1,28 @@
 import { useEffect, useState } from 'react'
+import { Route, Routes } from 'react-router-dom'
 import { api } from './api'
-import Dashboard from './Dashboard'
-import FrameworkControls from './FrameworkControls'
+import Layout from './Layout'
 import Login from './Login'
-import UnifiedControls from './UnifiedControls'
+import ControlPage from './pages/ControlPage'
+import Controls from './pages/Controls'
+import Framework from './pages/Framework'
+import Gaps from './pages/Gaps'
+import Home from './pages/Home'
+import Requirement from './pages/Requirement'
+import SearchPage from './pages/SearchPage'
+import { Crumbs, PageTitle } from './ui'
 
-const TABS = [
-  ['dashboard', 'Dashboard'],
-  ['unified', 'Unified controls'],
-  ['framework', 'Framework controls'],
-]
+function NotFound() {
+  return (
+    <>
+      <Crumbs trail={[{ label: 'Page not found' }]} />
+      <PageTitle title="Page not found">This address does not match any page. Use the menu on the left to continue.</PageTitle>
+    </>
+  )
+}
 
 export default function App() {
   const [user, setUser] = useState(undefined) // undefined while the session is being checked
-  const [page, setPage] = useState({ view: 'dashboard', id: null })
-  const go = (view, id = null) => setPage({ view, id })
 
   useEffect(() => {
     api('/auth/session/').then((d) => setUser(d.user)).catch(() => setUser(null))
@@ -23,41 +31,21 @@ export default function App() {
   if (user === undefined) return <p className="p-8 text-sm text-stone-500">Loading…</p>
   if (!user) return <Login onSignedIn={setUser} />
 
-  const signOut = () => api('/auth/logout/', { method: 'POST' }).then(() => { go('dashboard'); setUser(null) })
+  const signOut = () => api('/auth/logout/', { method: 'POST' }).then(() => setUser(null))
   const isAdmin = user.role === 'admin'
 
   return (
-    <div className="min-h-screen">
-      <header className="border-b border-stone-200 bg-white">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3">
-          <span className="text-base font-semibold">UCF Repository</span>
-          <nav className="flex gap-1">
-            {TABS.map(([view, label]) => (
-              <button
-                key={view}
-                onClick={() => go(view)}
-                className={`rounded-md px-3 py-1.5 text-sm ${
-                  page.view === view ? 'bg-stone-900 text-white' : 'text-stone-700 hover:bg-stone-100'
-                }`}
-              >
-                {label}
-              </button>
-            ))}
-          </nav>
-          <div className="ml-auto flex items-center gap-3 text-sm text-stone-600">
-            {isAdmin && <a href="/admin/" className="underline hover:text-stone-900">Admin site</a>}
-            <span>{user.username} ({user.role})</span>
-            <button onClick={signOut} className="rounded-md border border-stone-300 px-3 py-1.5 hover:bg-stone-100">
-              Sign out
-            </button>
-          </div>
-        </div>
-      </header>
-      <main className="mx-auto max-w-7xl px-4 py-6">
-        {page.view === 'dashboard' && <Dashboard go={go} />}
-        {page.view === 'unified' && <UnifiedControls selected={page.id} go={go} isAdmin={isAdmin} />}
-        {page.view === 'framework' && <FrameworkControls selected={page.id} go={go} />}
-      </main>
-    </div>
+    <Layout user={user} onSignOut={signOut}>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/controls" element={<Controls />} />
+        <Route path="/controls/:id" element={<ControlPage isAdmin={isAdmin} />} />
+        <Route path="/frameworks/:id" element={<Framework />} />
+        <Route path="/requirements/:id" element={<Requirement />} />
+        <Route path="/gaps" element={<Gaps />} />
+        <Route path="/search" element={<SearchPage />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Layout>
   )
 }

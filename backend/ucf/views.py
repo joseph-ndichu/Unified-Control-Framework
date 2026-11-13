@@ -89,7 +89,8 @@ class LogoutView(APIView):
 # ---------- Source framework controls -----------------------------------------
 def framework_control_row(fc, state, met):
     return {
-        "id": fc.id, "framework": fc.framework.name, "control_ref": fc.control_ref,
+        "id": fc.id, "framework": fc.framework.name, "framework_id": fc.framework_id,
+        "control_ref": fc.control_ref, "parent_id": fc.parent_id,
         "parent_ref": fc.parent.control_ref if fc.parent_id else None,
         "domain": fc.domain, "subdomain": fc.subdomain, "title": fc.title, "text": fc.text,
         "coverage": state[fc.id], "met": met[fc.id],
@@ -102,6 +103,8 @@ class FrameworkControlList(APIView):
     def get(self, request):
         q = request.query_params
         qs = FrameworkControl.objects.select_related("framework", "parent")
+        if q.get("framework_id", "").isdigit():
+            qs = qs.filter(framework_id=q["framework_id"])
         if q.get("framework"):
             qs = qs.filter(framework__name=q["framework"])
         if q.get("domain"):
@@ -112,7 +115,13 @@ class FrameworkControlList(APIView):
             term = q["search"].strip()
             qs = qs.filter(Q(control_ref__icontains=term) | Q(title__icontains=term) | Q(text__icontains=term))
         state, met = coverage()
-        rows = [framework_control_row(fc, state, met) for fc in qs]
+        covered_by = defaultdict(list)
+        for m in Mapping.objects.select_related("unified_control"):
+            covered_by[m.framework_control_id].append({
+                "id": m.unified_control_id, "code": m.unified_control.code,
+                "title": m.unified_control.title, "relationship": m.relationship,
+                "implementation_status": m.unified_control.implementation_status})
+        rows = [{**framework_control_row(fc, state, met), "covered_by": covered_by.get(fc.id, [])} for fc in qs]
         if q.get("coverage"):
             rows = [r for r in rows if r["coverage"] == q["coverage"]]
         return Response(rows)
@@ -126,7 +135,7 @@ class FrameworkControlDetail(APIView):
         state, met = coverage()
         data = framework_control_row(fc, state, met)
         data["children"] = [
-            {"id": c.id, "control_ref": c.control_ref, "text": c.text, "coverage": state[c.id]}
+            {"id": c.id, "control_ref": c.control_ref, "text": c.text, "coverage": state[c.id], "met": met[c.id]}
             for c in fc.children.all()]
         data["mappings"] = [
             {"unified_control_id": m.unified_control_id, "code": m.unified_control.code,
@@ -240,7 +249,7 @@ class MetaView(APIView):
             groups[name][domain].add(subdomain)
         return Response({
             "frameworks": [
-                {"name": f.name, "version": f.version,
+                {"id": f.id, "name": f.name, "version": f.version,
                  "domains": [{"name": d, "subdomains": sorted(s for s in subs if s)}
                              for d, subs in sorted(groups[f.name].items())]}
                 for f in Framework.objects.all()],
@@ -266,7 +275,7 @@ class DashboardView(APIView):
                     counter[state[fc_id]] += 1
                     counter["met"] += int(met[fc_id])
             frameworks.append({
-                "name": framework.name, "version": framework.version,
+                "id": framework.id, "name": framework.name, "version": framework.version,
                 **{k: totals[k] for k in ["controls", "met", *STATES]},
                 "groups": [{"domain": d, "subdomain": s, **{k: c[k] for k in ["controls", "met", *STATES]}}
                            for (d, s), c in sorted(groups.items())],

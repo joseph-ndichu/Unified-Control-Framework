@@ -71,6 +71,13 @@ class ImportedDataTests(TestCase):
         self.assertEqual(len(get("/api/unified-controls/?framework=NCA ECC")), 8)   # IAM-03 and IAM-10 are ISO only
         self.assertEqual(len(get("/api/unified-controls/?framework=ISO/IEC 27001")), 10)
         self.assertEqual([r["code"] for r in get("/api/unified-controls/?search=source code")], ["UCF-IAM-10"])
+        iso = next(f for f in get("/api/meta/")["frameworks"] if f["name"] == "ISO/IEC 27001")
+        rows = get(f"/api/framework-controls/?framework_id={iso['id']}")
+        self.assertEqual(len(rows), 93)
+        a515 = next(r for r in rows if r["control_ref"] == "A.5.15")
+        self.assertEqual({c["code"] for c in a515["covered_by"]}, {"UCF-IAM-01", "UCF-IAM-02", "UCF-IAM-06"})
+        child = next(r for r in get("/api/framework-controls/?search=2.2.3.4") if r["control_ref"] == "2.2.3.4")
+        self.assertEqual(self.client.get(f"/api/framework-controls/{child['parent_id']}/").data["control_ref"], "2-2-3")
 
     def test_dashboard(self):
         self.client.force_authenticate(self.viewer)
