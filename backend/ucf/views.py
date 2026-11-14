@@ -299,4 +299,5 @@ class DashboardView(APIView):
             "source_controls": FrameworkControl.objects.filter(mappings__isnull=False).exclude(
                 mappings__relationship=Mapping.Relationship.RELATED).distinct().count(),
             "single_framework_controls": single,
+            "unowned": UnifiedControl.objects.filter(owner="").count(),
         })

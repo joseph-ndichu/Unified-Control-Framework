@@ -86,6 +86,7 @@ class ImportedDataTests(TestCase):
         self.assertEqual((nca["controls"], nca["full"]), (200, 10))  # 9 IAM rows plus 1-9-5
         self.assertEqual(sum(nca[s] for s in ["full", "combined", "partial", "related_only", "gap"]), 200)
         self.assertEqual({c["code"] for c in data["single_framework_controls"]}, {"UCF-IAM-03", "UCF-IAM-10"})
+        self.assertEqual(data["unowned"], UnifiedControl.objects.filter(owner="").count())
 
     def test_only_admin_can_edit(self):
         uc = UnifiedControl.objects.get(code="UCF-IAM-01")

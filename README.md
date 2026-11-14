@@ -21,7 +21,7 @@ evidenced once instead of once per framework.
 |---|---|
 | Database | PostgreSQL |
 | Backend | Django, Django REST Framework (`backend/`) |
-| Frontend | React, React Router, Tailwind CSS (`frontend/`) |
+| Frontend | React, React Router, Tailwind CSS, shadcn/ui (`frontend/`) |
 | Data | CSV files, the source of truth for frameworks and mappings (`data/`) |
 
 ## Setup
@@ -41,6 +41,13 @@ cd frontend && npm install
 ```
 
 ## Run
+
+Make sure PostgreSQL is running. On Debian and Kali, start the cluster itself
+(`postgresql` alone is only a wrapper):
+
+```bash
+sudo systemctl start postgresql@18-main
+```
 
 ```bash
 cd backend && .venv/bin/python manage.py runserver

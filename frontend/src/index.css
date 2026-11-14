@@ -1,5 +1,366 @@
+/* The look: a security operations console. Deep navy, one mint signal colour, crisp data. */
+@import "@fontsource-variable/space-grotesk";
+@import "@fontsource/ibm-plex-sans/400.css";
+@import "@fontsource/ibm-plex-sans/500.css";
+@import "@fontsource/ibm-plex-sans/600.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-body {
-  @apply bg-stone-50 text-stone-900 antialiased;
+/* shadcn components switch to dark with the same attribute our theme toggle sets. */
+@custom-variant dark (&:is([data-theme="dark"] *));
+
+/* Dark is the home theme. The light values are further down. */
+@theme {
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-display: "Space Grotesk Variable", "IBM Plex Sans", sans-serif;
+
+  --color-canvas: #080c14;     /* page */
+  --color-surface: #101726;    /* panels and fields */
+  --color-fg: #e7edf6;         /* main text */
+  --color-line: #222c3f;       /* borders */
+  --color-signal: #35e0bd;     /* the accent: fills, bars, glows */
+  --color-signal-fg: #4be6c6;  /* the accent as text */
+  --color-on-signal: #04140f;  /* text on an accent fill */
+  --color-warn: #f6b443;       /* "partly" and "in progress" */
+  --color-rail: #060910;       /* the menu */
+  --color-chalk: #e7edf6;      /* text on the menu */
+
+  /* The neutral scale the pages use, tuned to cool slate. */
+  --color-white: #101726;
+  --color-stone-50: #172033;   /* hover wash */
+  --color-stone-100: #1b2437;  /* soft dividers, bar tracks */
+  --color-stone-200: #222c3f;
+  --color-stone-300: #2c3850;
+  --color-stone-500: #7c8aa2;
+  --color-stone-600: #95a2b8;
+  --color-stone-700: #b3bed0;
+  --color-stone-800: #d0d8e5;
+  --color-stone-900: #e7edf6;
+
+  --radius-sm: 4px;
+  --radius: 6px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --color-canvas: #f1f4f9;
+  --color-surface: #ffffff;
+  --color-fg: #0e1626;
+  --color-line: #d5dce8;
+  --color-signal: #10b396;
+  --color-signal-fg: #08806b;
+  --color-on-signal: #ffffff;
+  --color-warn: #b97509;
+  --color-white: #ffffff;
+  --color-stone-50: #eef2f7;
+  --color-stone-100: #e4e9f1;
+  --color-stone-200: #d5dce8;
+  --color-stone-300: #c3ccda;
+  --color-stone-500: #627089;
+  --color-stone-600: #4d5a72;
+  --color-stone-700: #38445a;
+  --color-stone-800: #212b3e;
+  --color-stone-900: #0e1626;
+}
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  /* Paper is white, so always print with the light colours, even from dark mode. */
+  :root {
+    color-scheme: light;
+    --color-canvas: #ffffff;
+    --color-surface: #ffffff;
+    --color-fg: #0e1626;
+    --color-line: #d5dce8;
+    --color-signal: #10b396;
+    --color-signal-fg: #08806b;
+    --color-warn: #b97509;
+    --color-stone-100: #e4e9f1;
+    --color-stone-300: #c3ccda;
+    --color-stone-500: #627089;
+    --color-stone-600: #4d5a72;
+    --color-stone-700: #38445a;
+    --color-stone-800: #212b3e;
+    --color-stone-900: #0e1626;
+  }
+  body {
+    background: #fff !important;
+  }
+  .panel {
+    break-inside: avoid;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    background-color: var(--color-canvas);
+    /* A faint engineering grid, with a soft glow of the signal colour in one corner. */
+    background-image:
+      radial-gradient(60rem 30rem at 100% -10%, color-mix(in srgb, var(--color-signal) 9%, transparent), transparent 70%),
+      linear-gradient(color-mix(in srgb, var(--color-fg) 3.5%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--color-fg) 3.5%, transparent) 1px, transparent 1px);
+    background-size: auto, 36px 36px, 36px 36px;
+    background-attachment: fixed;
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--color-signal);
+    color: var(--color-on-signal);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 2px;
+  }
+  a.underline, button.underline {
+    color: var(--color-signal-fg);
+    text-decoration-color: color-mix(in srgb, var(--color-signal) 45%, transparent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  a.underline:hover, button.underline:hover {
+    text-decoration-color: var(--color-signal);
+  }
+  input[type="checkbox"] {
+    appearance: none;
+    width: 1.05rem;
+    height: 1.05rem;
+    flex-shrink: 0;
+    border: 1.5px solid var(--color-stone-500);
+    border-radius: 4px;
+    background: var(--color-canvas);
+    display: inline-grid;
+    place-content: center;
+    transition: background-color 0.12s, border-color 0.12s;
+  }
+  input[type="checkbox"]:checked {
+    background: var(--color-signal);
+    border-color: var(--color-signal);
+  }
+  input[type="checkbox"]:checked::after {
+    content: "";
+    width: 0.3rem;
+    height: 0.6rem;
+    border: solid var(--color-on-signal);
+    border-width: 0 2px 2px 0;
+    transform: translateY(-1px) rotate(45deg);
+  }
+  input[type="checkbox"]:disabled {
+    opacity: 0.6;
+  }
+  summary {
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+@layer components {
+  .display {
+    font-family: var(--font-display);
+    letter-spacing: -0.015em;
+  }
+  /* Small technical label: section names, kickers, column heads. */
+  .label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+  .panel {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    /* A hairline of light along the top edge, like a lit bezel. */
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-fg) 5%, transparent);
+  }
+  .panel-head {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    border-bottom: 1px solid var(--color-line);
+    padding: 0.7rem 1.25rem;
+  }
+  /* A lit indicator in front of each panel title. */
+  .panel-head::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: var(--color-signal);
+    box-shadow: 0 0 8px var(--color-signal);
+  }
+  /* Coverage marks: solid, hatched, or empty, so they never rely on colour alone. */
+  .cov-covered {
+    background: var(--color-signal);
+    border-color: var(--color-signal);
+  }
+  .cov-partly {
+    background: repeating-linear-gradient(135deg, var(--color-warn) 0 2px, transparent 2px 4.5px);
+    border-color: var(--color-warn);
+  }
+  .cov-none {
+    background: transparent;
+    border-color: var(--color-stone-500);
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    background: var(--color-signal);
+    color: var(--color-on-signal);
+    border: 1px solid var(--color-signal);
+    border-radius: var(--radius-md);
+    padding: 0.45rem 0.85rem;
+    transition: box-shadow 0.15s, opacity 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .btn:hover:not(:disabled) {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-signal) 25%, transparent);
+  }
+  .btn:disabled {
+    opacity: 0.35;
+  }
+  /* A quieter button for secondary actions. */
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-fg);
+    border-color: var(--color-stone-300);
+  }
+  .btn-ghost:hover:not(:disabled) {
+    border-color: var(--color-signal);
+    color: var(--color-signal-fg);
+    box-shadow: none;
+  }
+  .field {
+    background: var(--color-canvas);
+    border: 1px solid var(--color-stone-300);
+    border-radius: var(--radius-md);
+    padding: 0.45rem 0.65rem;
+    font-size: 0.875rem;
+    color: var(--color-fg);
+    transition: border-color 0.12s, box-shadow 0.12s;
+  }
+  .field:focus {
+    outline: none;
+    border-color: var(--color-signal);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-signal) 20%, transparent);
+  }
+  details > summary .turn {
+    transition: transform 0.15s;
+  }
+  details[open] > summary .turn {
+    transform: rotate(90deg);
+  }
+  /* List rows light a signal bar in the margin on hover. */
+  .row {
+    position: relative;
+  }
+  .row:hover::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55rem;
+    bottom: 0.55rem;
+    width: 2px;
+    border-radius: 2px;
+    background: var(--color-signal);
+    box-shadow: 0 0 8px var(--color-signal);
+  }
+}
+
+/* ---------- shadcn/ui bridge ----------------------------------------------
+   shadcn components are written against these names. Each one points at a
+   console token, so any component added later arrives already in our look,
+   in both dark and light. */
+@theme inline {
+  --font-heading: var(--font-display);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.5rem;
+  --background: var(--color-canvas);
+  --foreground: var(--color-fg);
+  --card: var(--color-surface);
+  --card-foreground: var(--color-fg);
+  --popover: var(--color-surface);
+  --popover-foreground: var(--color-fg);
+  --primary: var(--color-signal);
+  --primary-foreground: var(--color-on-signal);
+  --secondary: var(--color-stone-50);
+  --secondary-foreground: var(--color-fg);
+  --muted: var(--color-stone-50);
+  --muted-foreground: var(--color-stone-500);
+  --accent: var(--color-stone-50);
+  --accent-foreground: var(--color-fg);
+  --destructive: #ff6b6b;
+  --border: var(--color-line);
+  --input: var(--color-stone-300);
+  --ring: var(--color-signal);
+  --chart-1: var(--color-signal);
+  --chart-2: var(--color-warn);
+  --chart-3: #5aa9ff;
+  --chart-4: #b48cff;
+  --chart-5: var(--color-stone-500);
+  --sidebar: var(--color-rail);
+  --sidebar-foreground: var(--color-chalk);
+  --sidebar-primary: var(--color-signal);
+  --sidebar-primary-foreground: var(--color-on-signal);
+  --sidebar-accent: color-mix(in srgb, var(--color-chalk) 7%, transparent);
+  --sidebar-accent-foreground: var(--color-chalk);
+  --sidebar-border: var(--color-line);
+  --sidebar-ring: var(--color-signal);
+}
+[data-theme="light"] {
+  --destructive: #d43c3c;
 }

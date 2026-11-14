@@ -1,5 +1,5 @@
 import { Link, useSearchParams } from 'react-router-dom'
-import { Card, Crumbs, Notice, PageTitle, StatusChip, useApi } from '../ui'
+import { Card, Crumbs, Sections, Notice, PageTitle, StatusChip, useApi } from '../ui'
 import { RequirementRow } from './Framework'
 
 export default function SearchPage() {
@@ -25,16 +25,16 @@ export default function SearchPage() {
       </PageTitle>
       {!ready && <Notice error={controls.error || requirements.error} loading />}
       {ready && (
-        <div className="flex flex-col gap-4">
+        <Sections>
           <Card title={`Our controls (${controls.data.length})`}>
             {controls.data.length === 0 && <p className="text-sm text-stone-600">No controls match.</p>}
             <ul className="flex flex-col divide-y divide-stone-100">
               {controls.data.map((c) => (
                 <li key={c.id}>
-                  <Link to={`/controls/${c.id}`} className="flex items-center gap-3 rounded-md px-2 py-2.5 text-sm hover:bg-stone-50">
+                  <Link to={`/controls/${c.id}`} className="row flex items-center gap-4 px-3 py-3 text-sm hover:bg-stone-50">
                     <span className="flex-1">
                       <span className="font-medium">{c.title}</span>
-                      <span className="block text-xs text-stone-500">{c.code} · {c.domain}</span>
+                      <span className="mt-0.5 block text-xs text-stone-500"><span className="font-mono text-signal-fg">{c.code}</span> · {c.domain}</span>
                     </span>
                     <StatusChip status={c.implementation_status} />
                   </Link>
@@ -47,14 +47,14 @@ export default function SearchPage() {
             <ul className="flex flex-col divide-y divide-stone-100">
               {requirements.data.slice(0, 100).map((r) => (
                 <li key={r.id} className="list-none">
-                  <p className="px-2 pt-2 text-xs text-stone-500">{r.framework} · {r.subdomain || r.domain}</p>
+                  <p className="px-3 pt-3 text-xs text-stone-500">{r.framework} · {r.subdomain || r.domain}</p>
                   <ul><RequirementRow row={r} /></ul>
                 </li>
               ))}
             </ul>
             {requirements.data.length > 100 && <p className="mt-2 text-sm text-stone-500">Showing the first 100. Narrow the search to see fewer.</p>}
           </Card>
-        </div>
+        </Sections>
       )}
     </>
   )

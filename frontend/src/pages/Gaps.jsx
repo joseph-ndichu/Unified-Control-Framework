@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Card, Crumbs, Notice, PageTitle, tally, useApi } from '../ui'
+import { Card, Crumbs, Sections, Notice, PageTitle, tally, useApi } from '../ui'
 import { RequirementRow } from './Framework'
 
 export default function Gaps() {
@@ -12,12 +12,12 @@ export default function Gaps() {
     <>
       <Crumbs trail={[{ label: 'Gaps' }]} />
       <PageTitle title="Gaps">What our controls do not yet answer, and where the two frameworks differ.</PageTitle>
-      <div className="flex flex-col gap-4">
-        <Card title="Requirements not covered yet" hint="No control has been mapped to these requirements so far.">
+      <Sections>
+        <Card title="Requirements not covered yet" hint="No control satisfies these requirements yet, not even in part.">
           <ul className="flex flex-col divide-y divide-stone-100">
             {dash.data.frameworks.map((f) => (
-              <li key={f.id} className="flex items-center gap-3 py-2.5 text-sm">
-                <span className="w-12 text-right text-lg font-semibold tabular-nums">{tally(f).none}</span>
+              <li key={f.id} className="flex items-baseline gap-4 py-3 text-sm">
+                <span className="w-12 text-right font-mono text-base font-medium text-warn tabular-nums">{tally(f).none}</span>
                 <span className="flex-1">of {f.controls} {f.name} requirements</span>
                 <Link to={`/frameworks/${f.id}?show=none`} className="underline">Show them</Link>
               </li>
@@ -36,14 +36,14 @@ export default function Gaps() {
           {single.length === 0 && <p className="text-sm text-stone-600">None.</p>}
           <ul className="flex flex-col divide-y divide-stone-100">
             {single.map((c) => (
-              <li key={c.id} className="flex flex-wrap items-center gap-x-3 py-2.5 text-sm">
+              <li key={c.id} className="flex flex-wrap items-center gap-x-3 py-3 text-sm">
                 <Link to={`/controls/${c.id}`} className="flex-1 font-medium underline">{c.title}</Link>
-                <span className="text-stone-600">Asked for by {c.required_by} only</span>
+                <span className="text-xs text-stone-500">Asked for by {c.required_by} only</span>
               </li>
             ))}
           </ul>
         </Card>
-      </div>
+      </Sections>
     </>
   )
 }

@@ -1,5 +1,7 @@
 import { Link, useSearchParams } from 'react-router-dom'
-import { Card, Choices, Crumbs, Notice, PageTitle, STATUS, STATUS_ORDER, StatusChip, useApi } from '../ui'
+import { Download } from 'lucide-react'
+import { downloadCsv } from '../export'
+import { Card, Choices, Sections, Crumbs, Notice, PageTitle, STATUS, STATUS_ORDER, StatusChip, useApi } from '../ui'
 
 export default function Controls() {
   const [params, setParams] = useSearchParams()
@@ -25,28 +27,35 @@ export default function Controls() {
       <PageTitle title={domain || 'Our controls'}>
         Each control below is written once and satisfies requirements in one or more frameworks. Open one to see which.
       </PageTitle>
-      <div className="mb-4">
+      <div className="no-print mb-5 flex flex-wrap items-center justify-between gap-3">
         <Choices value={status} onChange={setStatus} options={[
           { value: '', label: 'All', count: all.length },
           ...STATUS_ORDER.map((s) => ({ value: s, label: STATUS[s], count: all.filter((c) => c.implementation_status === s).length })),
         ]} />
+        <button className="btn" disabled={shown.length === 0} onClick={() => downloadCsv('ucf-controls.csv',
+          ['Code', 'Control', 'Domain', 'Policy', 'Statement', 'Owner', 'Status', 'Satisfies', 'Evidence collected', 'Evidence needed'],
+          shown.map((c) => [c.code, c.title, c.domain, c.policy, c.statement, c.owner, STATUS[c.implementation_status],
+            c.frameworks.join('; '), c.evidence_collected, c.evidence_total]))}>
+          <Download className="h-4 w-4" />Export CSV
+        </button>
       </div>
       <Notice error={error} loading={loading} />
       {data && shown.length === 0 && <p className="text-sm text-stone-600">No controls match this filter.</p>}
-      <div className="flex flex-col gap-4">
+      <Sections>
         {Object.entries(tree).map(([domainName, policies]) => (
-          <Card key={domainName} title={domainName} hint="Domain">
+          <Card key={domainName} title={`Domain: ${domainName}`}>
             {Object.entries(policies).map(([policy, controls]) => (
-              <div key={policy} className="mt-2">
-                <p className="text-sm font-medium text-stone-700">Policy: {policy}</p>
-                <ul className="mt-1 flex flex-col divide-y divide-stone-100">
+              <div key={policy}>
+                <p className="display font-semibold">{policy}</p>
+                <p className="label mt-1 text-stone-500">Policy · {controls.length} controls</p>
+                <ul className="mt-3 flex flex-col divide-y divide-stone-100 border-t border-stone-100">
                   {controls.map((c) => (
                     <li key={c.id}>
-                      <Link to={`/controls/${c.id}`} className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-md px-2 py-2.5 hover:bg-stone-50">
+                      <Link to={`/controls/${c.id}`} className="row flex flex-wrap items-center gap-x-4 gap-y-1 px-3 py-3 hover:bg-stone-50">
                         <span className="min-w-48 flex-1">
                           <span className="font-medium text-stone-900">{c.title}</span>
-                          <span className="block text-xs text-stone-500">
-                            {c.code} · satisfies {c.frameworks.join(' and ') || 'no framework yet'} · evidence {c.evidence_collected} of {c.evidence_total}
+                          <span className="mt-0.5 block text-xs text-stone-500">
+                            <span className="font-mono text-signal-fg">{c.code}</span> · satisfies {c.frameworks.join(' and ') || 'no framework yet'} · evidence {c.evidence_collected} of {c.evidence_total}
                           </span>
                         </span>
                         <span className="text-xs text-stone-500">{c.owner || 'No owner'}</span>
@@ -59,7 +68,7 @@ export default function Controls() {
             ))}
           </Card>
         ))}
-      </div>
+      </Sections>
     </>
   )
 }
