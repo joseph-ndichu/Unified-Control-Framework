@@ -2,6 +2,8 @@
 import os
 from pathlib import Path
 
+import dj_database_url
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 PROJECT_ROOT = BASE_DIR.parent
 
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # serves the admin's CSS and JS online
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -63,16 +66,20 @@ TEMPLATES = [
     },
 ]
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("UCF_DB_NAME", "ucf"),
-        "USER": os.environ.get("UCF_DB_USER", "ucf"),
-        "PASSWORD": os.environ.get("UCF_DB_PASSWORD", ""),
-        "HOST": os.environ.get("UCF_DB_HOST", "localhost"),
-        "PORT": os.environ.get("UCF_DB_PORT", "5432"),
+# Online: one DATABASE_URL (e.g. from Neon). Locally: the UCF_DB_* values.
+if os.environ.get("DATABASE_URL"):
+    DATABASES = {"default": dj_database_url.config(conn_max_age=600, conn_health_checks=True)}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.environ.get("UCF_DB_NAME", "ucf"),
+            "USER": os.environ.get("UCF_DB_USER", "ucf"),
+            "PASSWORD": os.environ.get("UCF_DB_PASSWORD", ""),
+            "HOST": os.environ.get("UCF_DB_HOST", "localhost"),
+            "PORT": os.environ.get("UCF_DB_PORT", "5432"),
+        }
     }
-}
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
@@ -92,6 +99,13 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# Online the app sits behind https proxies (Render, and Vercel in front).
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Folder holding the framework and mapping CSV files.

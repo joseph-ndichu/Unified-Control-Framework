@@ -1,0 +1,33 @@
+# Render blueprint: the Django API. See DEPLOY.md.
+services:
+  - type: web
+    name: ucf-backend
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: >-
+      pip install -r requirements.txt &&
+      python manage.py collectstatic --noinput &&
+      python manage.py migrate --noinput &&
+      python manage.py import_ucf &&
+      (python manage.py createsuperuser --noinput || true)
+    startCommand: gunicorn config.wsgi --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: UCF_DEBUG
+        value: "0"
+      - key: UCF_SECRET_KEY
+        generateValue: true
+      - key: UCF_ALLOWED_HOSTS
+        value: .onrender.com,.vercel.app,ucf.estenlab.com
+      - key: DATABASE_URL
+        sync: false
+      - key: UCF_TRUSTED_ORIGINS
+        sync: false
+      - key: DJANGO_SUPERUSER_USERNAME
+        sync: false
+      - key: DJANGO_SUPERUSER_EMAIL
+        sync: false
+      - key: DJANGO_SUPERUSER_PASSWORD
+        sync: false

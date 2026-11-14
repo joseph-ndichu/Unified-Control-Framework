@@ -8,3 +8,4 @@ dist/
 
 # Source documents and notes stay local
 Docs/
+backend/staticfiles/
